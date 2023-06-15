@@ -86,3 +86,10 @@ FID was introduced by Martin Heusel, Hubert Ramsauer, Thomas Unterthiner, Bernha
 
 The original implementation is by the Institute of Bioinformatics, JKU Linz, licensed under the Apache License 2.0.
 See [https://github.com/bioinf-jku/TTUR](https://github.com/bioinf-jku/TTUR).
+
+## Troubleshooting
+
+- If you encountered the following error, `"Trying to resize storage that is not resizable"`, it is more likely that the `batch size (default:50)` is too large to fit in your GPU. It is thus suggested to try with a smaller `batch size` with `--batch-size` option.
+
+- If you encounter a shape mismatch error, it is because the original implementation takes the original image shape and feeds it as-is. This may be incompatible with the InceptionV3 input shape. This repo added a resize feature (width=512, height=512) by default in order to avoid this. Therefore, you will not see the error. However, this modification may affect FID scores.
+
